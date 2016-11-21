@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require ./test-helper.js \"test/**/*@(.js)\"",
+    "test": "mocha --compilers js:babel-core/register --require ./test-helper.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [],
@@ -29,6 +29,7 @@
   "dependencies": {
     "immutable": "^3.8.1",
     "react": "^15.4.0",
+    "react-addons-test-utils": "^15.4.0",
     "react-dom": "^15.4.0"
   }
 }
