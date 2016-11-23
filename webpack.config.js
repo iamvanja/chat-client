@@ -9,6 +9,8 @@ const sassLoaders = [
   'sass?sourceMap'
 ];
 
+// @todo: figure out order of scss files when constructing main.css
+
 module.exports = {
     devtool: 'source-map',
     entry: [
