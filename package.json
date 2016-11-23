@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require ./test-helper.js \"src/**/*.test.js\"",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress --colors --inline",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --require ./test-helper.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [],
@@ -19,9 +20,13 @@
     "chai": "^3.5.0",
     "chai-immutable": "^1.6.0",
     "css-loader": "^0.26.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "jsdom": "^9.8.3",
     "mocha": "^3.1.2",
+    "node-sass": "^3.13.0",
+    "postcss-loader": "^1.1.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"

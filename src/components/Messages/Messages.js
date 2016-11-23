@@ -1,7 +1,8 @@
 import React from 'react';
 import Message from './Message';
+import './Messages.scss';
 
-class MessagesList extends React.Component {
+class Messages extends React.Component {
     constructor(props) {
         super(props);
 
@@ -43,4 +44,4 @@ class MessagesList extends React.Component {
     }
 }
 
-export default MessagesList;
+export default Messages;

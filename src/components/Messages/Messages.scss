@@ -1,0 +1,9 @@
+/*MessagesList*/
+.messages-list {
+    background: red;
+    .message {
+        .message-text {
+            margin-right: 5px;
+        }
+    }
+}

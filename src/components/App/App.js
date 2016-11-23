@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './Header';
-import MessagesList from './MessagesList';
-import ChatForm from './ChatForm';
+import Header from '../Header/Header';
+import Messages from '../Messages/Messages';
+import ChatForm from '../ChatForm/ChatForm';
 
 let messages = [
     {
@@ -39,7 +39,7 @@ class App extends React.Component {
         return (
             <div className="app">
                 <Header />
-                <MessagesList messages={messages} />
+                <Messages messages={messages} />
                 <ChatForm />
             </div>
         )

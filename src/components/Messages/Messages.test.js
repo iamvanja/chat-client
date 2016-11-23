@@ -6,7 +6,7 @@ import {
 } from 'react-addons-test-utils';
 import {expect} from 'chai';
 
-import MessagesList from './MessagesList';
+import Messages from './Messages';
 
 const messages = [
     {
@@ -29,7 +29,7 @@ describe('Messages', () => {
 
     it('renders messages', () => {
         const component = renderIntoDocument(
-            <MessagesList messages={messages} />
+            <Messages messages={messages} />
         );
         const messageEls = scryRenderedDOMComponentsWithClass(component, 'message');
         const [firstMsg, secondMsg] = messageEls.map(el => el.textContent);
@@ -43,7 +43,7 @@ describe('Messages', () => {
 
     it('renders empy message when empty array is supplied', () => {
         const component = renderIntoDocument(
-            <MessagesList messages={[]} />
+            <Messages messages={[]} />
         );
         const emptyComment = scryRenderedDOMComponentsWithClass(component, 'empty-comment');
 
@@ -52,7 +52,7 @@ describe('Messages', () => {
 
     it('renders empy message when prop is undefined', () => {
         const component = renderIntoDocument(
-            <MessagesList messages={undefined} />
+            <Messages messages={undefined} />
         );
         const emptyComment = scryRenderedDOMComponentsWithClass(component, 'empty-comment');
 

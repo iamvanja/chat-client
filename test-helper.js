@@ -19,3 +19,12 @@ Object.keys(window).forEach(key => {
 });
 
 chai.use(chaiImmutable);
+
+// ignore styles
+function donothing() {
+  return null;
+}
+
+require.extensions['.css'] = donothing;
+require.extensions['.less'] = donothing;
+require.extensions['.scss'] = donothing;
