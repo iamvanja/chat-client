@@ -50,7 +50,7 @@ module.exports = {
     sassLoader: {
         includePaths: [
             path.resolve(__dirname, './src/scss'),
-            path.resolve(__dirname, './node_modules/normalize-scss/sass')
+            path.resolve(__dirname, './node_modules/foundation-sites/scss')
         ]
     },
     devServer: {
