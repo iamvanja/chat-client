@@ -4,9 +4,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const sassLoaders = [
-  'css-loader?sourceMap',
-  'postcss-loader',
-  `sass-loader?includePaths[]=${path.resolve(__dirname, './src')}&?sourceMap`
+  'css?sourceMap',
+  'postcss',
+  'sass?sourceMap'
 ];
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
+                loader: ExtractTextPlugin.extract('style', sassLoaders.join('!'))
             }
         ]
     },
@@ -47,12 +47,12 @@ module.exports = {
         })
     ],
     // not supported by ExtractTextPlugin
-    // sassLoader: {
-    //     includePaths: [
-    //         path.resolve(__dirname, './src'),
-    //         path.resolve(__dirname, './node_modules/normalize-scss/sass/normalize')
-    //     ]
-    // },
+    sassLoader: {
+        includePaths: [
+            path.resolve(__dirname, './src/scss'),
+            path.resolve(__dirname, './node_modules/normalize-scss/sass')
+        ]
+    },
     devServer: {
         contentBase: './dist',
         hot: true
