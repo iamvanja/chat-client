@@ -6,7 +6,7 @@ const path = require('path');
 const sassLoaders = [
   'css-loader',
   'postcss-loader',
-  'sass-loader'
+  `sass-loader?includePaths[]=${path.resolve(__dirname, './src')}`
 ];
 
 module.exports = {
@@ -45,9 +45,13 @@ module.exports = {
             ]
         })
     ],
-    sassLoader: {
-        includePaths: [path.resolve(__dirname, './src')]
-    },
+    // not supported by ExtractTextPlugin
+    // sassLoader: {
+    //     includePaths: [
+    //         path.resolve(__dirname, './src'),
+    //         path.resolve(__dirname, './node_modules/normalize-scss/sass/normalize')
+    //     ]
+    // },
     devServer: {
         contentBase: './dist',
         hot: true
