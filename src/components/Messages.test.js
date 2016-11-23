@@ -33,13 +33,30 @@ describe('Messages', () => {
         );
         const messageEls = scryRenderedDOMComponentsWithClass(component, 'message');
         const [firstMsg, secondMsg] = messageEls.map(el => el.textContent);
-        console.log(firstMsg, secondMsg);
 
         expect(messageEls.length).to.equal(2);
         expect(firstMsg).to.contain('vanja');
         expect(firstMsg).to.contain('foo');
         expect(secondMsg).to.contain('jim');
         expect(secondMsg).to.contain('bar');
+    });
+
+    it('renders empy message when empty array is supplied', () => {
+        const component = renderIntoDocument(
+            <MessagesList messages={[]} />
+        );
+        const emptyComment = scryRenderedDOMComponentsWithClass(component, 'empty-comment');
+
+        expect(emptyComment.length).to.equal(1);
+    });
+
+    it('renders empy message when prop is undefined', () => {
+        const component = renderIntoDocument(
+            <MessagesList messages={undefined} />
+        );
+        const emptyComment = scryRenderedDOMComponentsWithClass(component, 'empty-comment');
+
+        expect(emptyComment.length).to.equal(1);
     });
 
 });

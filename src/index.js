@@ -4,7 +4,7 @@ import MessagesList from './components/MessagesList';
 
 import './style.css';
 
-const messages = [
+let messages = [
     {
       "createdBy": "vanja",
       "content": "foo",

@@ -1,22 +1,43 @@
 import React from 'react';
+import Message from './Message';
 
 class MessagesList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.getMessages = this.getMessages.bind(this);
+        this.renderMessages = this.renderMessages.bind(this);
+        this.renderEmptyComment = this.renderEmptyComment.bind(this);
+    }
+
     getMessages() {
         return this.props.messages || [];
     }
 
+    renderMessages(messages) {
+        return (
+            messages.map(message =>
+                <Message message={message} key={message.id} />
+            )
+        );
+    }
+
+    renderEmptyComment() {
+        return (
+            <div className="empty-comment">
+                <small>No comments yet...</small>
+            </div>
+        );
+    }
+
     render() {
+        const messages = this.getMessages();
         return (
             <div className="messages-list">
-                {this.getMessages().map(message =>
-                    <div className="message" key={message.id}>
-                        <p>
-                            <span className="message-text datetime">{message.createdAt}</span>
-                            <strong className="message-text author">{message.createdBy}</strong>
-                            <span className="message-text content">{message.content}</span>
-                        </p>
-                    </div>
-                )}
+                {messages.length ?
+                    this.renderMessages(messages) :
+                    this.renderEmptyComment()
+                }
             </div>
         );
     }
