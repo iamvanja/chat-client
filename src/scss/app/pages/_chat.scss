@@ -1,0 +1,10 @@
+.page-chat {
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-height: 100vh;
+    .messages {
+        flex: 1 1 auto;
+        overflow: auto;
+    }
+}

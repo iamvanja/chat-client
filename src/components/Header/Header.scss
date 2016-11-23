@@ -1,7 +1,10 @@
 @import "variables";
 
 .header {
-    background-color: #222;
-    padding: 20px;
-    color: white;
+    background-color: map-get($foundation-palette, primary);
+    padding: rem-calc(10);
+    color: $white;
+    h2, h4, p {
+        margin-bottom: 0;
+    }
 }

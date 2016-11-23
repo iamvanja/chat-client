@@ -1,11 +1,14 @@
 @import "variables";
 
 /*MessagesList*/
-.messages-list {
-    background: red;
+.messages {
+    padding: $global-padding;
     .message {
         .message-text {
             margin-right: 5px;
+        }
+        .content {
+            display:block;
         }
     }
 }

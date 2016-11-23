@@ -18,7 +18,7 @@ class ChatForm extends React.Component {
     render() {
         return (
             <form className="chat-form" onSubmit={this.onSubmit} ref="chatForm">
-                <input type="text" placeholder="Say something" ref="newMessage" />
+                <input type="text" placeholder="Message /room/<current-room>" ref="newMessage" />
                 <button type="submit" className="submit-button">POST</button>
             </form>
         );

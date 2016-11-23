@@ -37,7 +37,7 @@ let messages = [
 class App extends React.Component {
     render() {
         return (
-            <div className="app">
+            <div className="app page-chat">
                 <Header />
                 <Messages messages={messages} />
                 <ChatForm />

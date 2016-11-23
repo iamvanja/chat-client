@@ -34,7 +34,7 @@ class Messages extends React.Component {
     render() {
         const messages = this.getMessages();
         return (
-            <div className="messages-list">
+            <div className="messages">
                 {messages.length ?
                     this.renderMessages(messages) :
                     this.renderEmptyComment()
