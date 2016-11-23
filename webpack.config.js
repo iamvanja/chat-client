@@ -4,12 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const sassLoaders = [
-  'css-loader',
+  'css-loader?sourceMap',
   'postcss-loader',
-  `sass-loader?includePaths[]=${path.resolve(__dirname, './src')}`
+  `sass-loader?includePaths[]=${path.resolve(__dirname, './src')}&?sourceMap`
 ];
 
 module.exports = {
+    devtool: 'source-map',
     entry: [
         'webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
