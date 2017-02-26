@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 
 // import all routes
-import routes from './routes';
+import getRoutes from './routes';
 
 // import index scss
 import './scss/index';
@@ -35,7 +35,9 @@ sagaMiddleware.run(IndexSagas);
 // Setup the top level router component for our React Router
 ReactDOM.render(
     <Provider store={store}>
-        <Router children={routes} history={browserHistory} />
+        <Router history={browserHistory}>
+            {getRoutes(store)}
+        </Router>
     </Provider>,
     document.getElementById('root')
 );
