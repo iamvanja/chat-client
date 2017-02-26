@@ -1,3 +1,6 @@
+// called client instead of user because of consistency
+// with the back-end strongloop.js keeps User as a default
+// model and any custom model must be named differently
 import { CLIENT_SET, CLIENT_UNSET } from './constants';
 
 const initialState = {
