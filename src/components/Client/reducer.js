@@ -9,7 +9,6 @@ const initialState = {
 };
 
 const reducer = function clientReducer(state = initialState, action) {
-    console.log('hello from clientReducer', action);
     switch(action.type) {
         case CLIENT_SET:
             return {

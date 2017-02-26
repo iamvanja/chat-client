@@ -1,22 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+
+// import form helpers
+import FormMessages from '../FormMessages/FormMessages';
+import FormErrors from '../FormErrors/FormErrors';
 
 import { signupRequest } from './actions';
 
 class Signup extends Component {
+    // pass the correct proptypes in for validation
+    static propTypes = {
+        handleSubmit: PropTypes.func,
+        signupRequest: PropTypes.func,
+        signup: PropTypes.shape({
+            requesting: PropTypes.bool,
+            successful: PropTypes.bool,
+            messages: PropTypes.array,
+            errors: PropTypes.array,
+        }),
+    }
+
+    // Redux Form will call this function the value of our Form fields
+    // when the form is submitted
+    submit = (values) => {
+        console.log('submit', values);
+        this.props.signupRequest(values);
+    }
+
+
     render() {
+        const {
+            handleSubmit,
+            signup: {
+                requesting,
+                successful,
+                messages,
+                errors,
+            },
+        } = this.props;
+
         return (
             <div className="signup">
-                <form>
+                {/* Use this Submit handler with our own submit handler */}
+                <form onSubmit={handleSubmit(this.submit)}>
                     <label htmlFor="email">E-mail</label>
                     <Field
                         name="email"
-                        type="text"
+                        type="email"
                         id="email"
                         className="email"
                         placeholder="E-mail"
                         component="input"
+                        required="required"
                     />
 
                     <label htmlFor="password">Password</label>
@@ -27,10 +64,27 @@ class Signup extends Component {
                         className="password"
                         placeholder="Password"
                         component="input"
+                        required="required"
                     />
 
                     <button action="submit" className="button expanded">SIGNUP</button>
                 </form>
+                <div className="auth-messages">
+                    {!requesting && !!errors.length && (
+                        <FormErrors message="Failure to signup due to:" errors={errors} />
+                    )}
+                    {!requesting && !!messages.length && (
+                        <FormMessages messages={messages} />
+                    )}
+                    {!requesting && successful && (
+                        <div className="callout success">
+                            Signup successful! <Link to="/login">Click here to login</Link>
+                        </div>
+                    )}
+                    {!requesting && !successful && (
+                        <Link to="/login">Already a member? Login here</Link>
+                    )}
+                </div>
             </div>
         )
     }
