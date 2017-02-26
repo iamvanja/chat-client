@@ -33,6 +33,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "babel-preset-stage-0": "^6.22.0",
     "foundation-sites": "^6.2.4",
     "immutable": "^3.8.1",
     "react": "^15.4.0",
