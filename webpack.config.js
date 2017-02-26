@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 const sassLoaders = [
   'css?sourceMap',
@@ -63,6 +64,7 @@ module.exports = {
         new ExtractTextPlugin('[name].css', {
             allChunks: true
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new Dotenv()
     ]
 }
