@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import client from './components/Client/reducer';
 import signup from './components/Signup/reducer';
+import login from './components/Login/reducer';
 
 const IndexReducer = combineReducers({
     client,
     signup,
+    login,
     form,
 });
 

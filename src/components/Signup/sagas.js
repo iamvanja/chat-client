@@ -3,7 +3,7 @@ import { handleApiErrors } from '../../lib/api-errors';
 import { SIGNUP_REQUESTING, SIGNUP_SUCCESS, SIGNUP_ERROR } from './constants';
 
 // The url derived from our .env file
-const signupUrl = `${process.env.REACT_APP_API_URL}/api/Clients`
+const signupUrl = `${process.env.REACT_APP_API_URL}/api/Clients`;
 
 function signupApi(email, password) {
     // call to the "fetch".  this is a "native" function for browsers
