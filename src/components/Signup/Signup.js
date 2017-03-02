@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 // import form helpers
-import FormMessages from '../FormMessages/FormMessages';
-import FormErrors from '../FormErrors/FormErrors';
+import FormMessages from '../FormHelpers/FormMessages';
+import FormErrors from '../FormHelpers/FormErrors';
 
 import { signupRequest } from './actions';
 
@@ -27,7 +27,6 @@ class Signup extends Component {
     submit = (values) => {
         this.props.signupRequest(values);
     }
-
 
     render() {
         const {

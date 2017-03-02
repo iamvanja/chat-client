@@ -1,16 +1,16 @@
 @import "variables";
 
-/*ChatForm*/
-.chat-form {
+/*MessageForm*/
+.message-form {
     width:100%;
     // position:absolute;
     // bottom:0;
     // left:0;
     // right:0;
     // background:blue;
-    .submit-button {
-        display:none;
-    }
+    // .submit-button {
+    //     display:none;
+    // }
     textarea {
         width:100%;
         margin:0;

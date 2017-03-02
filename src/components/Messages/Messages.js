@@ -1,47 +1,71 @@
-import React from 'react';
-import Message from './Message';
-import './Messages.scss';
+import React, { Component, PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
-class Messages extends React.Component {
-    constructor(props) {
-        super(props);
+import MessageForm from './MessageForm';
+import MessagesList from './MessagesList';
 
-        this.getMessages = this.getMessages.bind(this);
-        this.renderMessages = this.renderMessages.bind(this);
-        this.renderEmptyComment = this.renderEmptyComment.bind(this);
-    }
+import FormErrors from '../FormHelpers/FormErrors';
 
-    getMessages() {
-        return this.props.messages || [];
-    }
+import { messageCreate } from './actions';
 
-    renderMessages(messages) {
-        return (
-            messages.map(message =>
-                <Message message={message} key={message.id} />
-            )
-        );
-    }
+class Messages extends Component {
 
-    renderEmptyComment() {
-        return (
-            <div className="empty-comment">
-                <small>No comments yet...</small>
-            </div>
-        );
+    static propTypes = {
+        handleSubmit: PropTypes.func.isRequired,
+        client: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            token: PropTypes.object.isRequired,
+        }),
+        chatMessages: PropTypes.shape({
+            list: PropTypes.array,
+            requesting: PropTypes.bool,
+            successful: PropTypes.bool,
+            messages: PropTypes.array,
+            errors: PropTypes.array,
+        }).isRequired,
+        messageCreate: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
     }
 
     render() {
-        const messages = this.getMessages();
+        const {
+            chatMessages: {
+                list,
+                requesting,
+                successful,
+                messages,
+                errors,
+            },
+        } = this.props;
+
         return (
-            <div className="messages">
-                {messages.length ?
-                    this.renderMessages(messages) :
-                    this.renderEmptyComment()
-                }
+            <div className="messages1">
+                <MessagesList {...this.props} />
+                <MessageForm {...this.props} />
+
+                <div className="form-messages">
+                    {requesting && <span>Posting...</span>}
+                    {!requesting && !!errors.length && (
+                        <FormErrors message="Failure to post due to:" errors={errors} />
+                    )}
+                </div>
             </div>
         );
     }
 }
 
-export default Messages;
+// Pull in both the Client and the chatMessages state
+const mapStateToProps = state => ({
+    client: state.client,
+    chatMessages: state.chatMessages,
+})
+
+// Make the client and chatMessages available in the props as well
+// as the messageCreate function
+const connected = connect(mapStateToProps, { messageCreate })(Messages);
+const formed = reduxForm({
+    form: 'chatMessages',
+})(connected);
+
+export default formed;
