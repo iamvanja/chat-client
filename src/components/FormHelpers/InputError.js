@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const InputError = (props) => {
     const {
@@ -34,8 +34,8 @@ InputError.propTypes = {
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     meta: PropTypes.shape({
-        touched: PropTypes.bool.isRequired,
-        error: PropTypes.bool.isRequired,
+        touched: PropTypes.bool,
+        error: PropTypes.string,
     }),
     label: PropTypes.string,
 }
