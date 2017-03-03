@@ -10,6 +10,7 @@ import {
 const initialState = {
     list: [],
     requesting: false,
+    posting: false,
     successful: false,
     messages: [],
     errors: [],
@@ -20,7 +21,7 @@ const reducer = function messageReducer(state = initialState, action) {
         case MESSAGE_CREATING:
             return Object.assign({}, state, initialState, {
                 list: state.list,
-                requesting: true,
+                posting: true,
                 messages: [{
                     body: `Message '${action.message.text}' is being created...`,
                     time: new Date(),
@@ -40,7 +41,9 @@ const reducer = function messageReducer(state = initialState, action) {
             });
 
         case MESSAGE_CREATE_ERROR:
-            return Object.assign({}, state, initialState, {
+            return Object.assign({}, state,  {
+                posting: false,
+                successful: false,
                 errors: state.errors.concat([{
                     body: action.error.toString(),
                     time: new Date(),

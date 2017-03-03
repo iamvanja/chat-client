@@ -1,0 +1,17 @@
+@import "variables";
+
+/*MessagesList*/
+.messages-list {
+    padding: $global-padding;
+    .message {
+        .message-text {
+            margin-right: 5px;
+        }
+        .content {
+            display:block;
+        }
+    }
+    .status-text {
+        margin: 10% 0;
+    }
+}

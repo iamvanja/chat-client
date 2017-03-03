@@ -1,14 +1,13 @@
 @import "variables";
 
-/*MessagesList*/
+/*Messages*/
 .messages {
-    padding: $global-padding;
-    .message {
-        .message-text {
-            margin-right: 5px;
-        }
-        .content {
-            display:block;
-        }
+    position:relative;
+    .error-messages {
+        position:absolute;
+        width:80%;
+        left:10%;top:0;
+        opacity:0.9;
     }
 }
+

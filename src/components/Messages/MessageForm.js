@@ -14,6 +14,7 @@ class MessageForm extends Component {
             id: PropTypes.number.isRequired,
             token: PropTypes.object.isRequired,
         }).isRequired,
+        loading: PropTypes.bool.isRequired,
         messageCreate: PropTypes.func.isRequired,
         reset: PropTypes.func.isRequired,
     }
@@ -29,18 +30,25 @@ class MessageForm extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const {
+            handleSubmit,
+            loading,
+        } = this.props;
 
         return (
             <form autoComplete="off" className="message-form" onSubmit={handleSubmit(this.submit)}>
                 <Field
                 name="text"
                 type="text"
-                id="text"
                 className="text"
                 placeholder="Message"
                 component={InputError}
+                disabled={loading}
                 validate={messageRequired} />
+
+                {loading && (
+                    <span className="posting">Posting...</span>
+                )}
             </form>
         );
     }

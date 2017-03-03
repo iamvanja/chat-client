@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import './MessagesList.scss';
 
 class MessagesList extends React.Component {
+
+    static propTypes = {
+        client: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            token: PropTypes.object.isRequired,
+        }).isRequired,
+        loading: PropTypes.bool.isRequired,
+        chatMessages: PropTypes.shape({
+            list: PropTypes.array.isRequired,
+        }).isRequired,
+        messageRequest: PropTypes.func.isRequired,
+    }
+
     constructor(props) {
         super(props);
 
@@ -34,34 +48,31 @@ class MessagesList extends React.Component {
         );
     }
 
-    renderEmptyComment = () => {
+    renderStatus = (text) => {
         return (
-            <div className="empty-comment">
-                <small>No comments yet...</small>
-            </div>
+            <h1 className="subheader text-center status-text">{text}</h1>
         );
     }
 
     render() {
         const {
+            loading,
             chatMessages: {
-                list,
-                requesting,
-                successful,
-                messages,
-                errors,
+                list
             },
         } = this.props;
-
         return (
-            <div className="messages">
-                {/* TODO: requesting */}
-                {list.length ?
+            <div className="messages-list">
+                {!loading && (list.length ?
                     list.map(message => {
                         return this.renderSingleMessage(message);
                     }) :
-                    this.renderEmptyComment()
+                    this.renderStatus('No comments yet...'))
                 }
+
+                {loading && (
+                    this.renderStatus('Loading messages...')
+                )}
 
                 <button className="button" onClick={this.fetchMessages}>Refetch Messages!</button>
             </div>

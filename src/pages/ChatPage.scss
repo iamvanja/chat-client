@@ -1,0 +1,20 @@
+@import "variables";
+
+%flex-column {
+    display:flex;
+    flex-direction: column;
+}
+
+.page-chat {
+    @extend %flex-column;
+    min-height: 100vh;
+    max-height: 100vh;
+    .messages,
+    .messages-list {
+        flex: 1 1 auto;
+        overflow: auto;
+    }
+    .messages {
+        @extend %flex-column;
+    }
+}

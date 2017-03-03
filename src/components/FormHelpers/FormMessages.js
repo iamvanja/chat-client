@@ -6,7 +6,7 @@ const FormMessages = (props) => {
     const { messages } = props;
     return (
         <div className="callout secondary">
-            <ul>
+            <ul className="no-bullet">
                 {messages.map(message => (
                     <li key={message.time}>{message.body}</li>
                 ))}

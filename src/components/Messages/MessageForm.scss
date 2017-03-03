@@ -3,16 +3,31 @@
 /*MessageForm*/
 .message-form {
     width:100%;
-    // position:absolute;
-    // bottom:0;
-    // left:0;
-    // right:0;
-    // background:blue;
-    // .submit-button {
-    //     display:none;
-    // }
-    textarea {
+    position:relative;
+    input {
         width:100%;
         margin:0;
+    }
+    .form-error {
+        margin-top: rem-calc(4);
+        margin-bottom:0;
+    }
+
+    .posting {
+        position:absolute;
+        top:rem-calc(-24px);
+        width:100%;
+        opacity:0.85;
+        background: $light-gray;
+        text-align: center;
+        font-size: rem-calc(12px);
+        height: rem-calc(24px);
+        line-height: rem-calc(24px);
+    }
+    .error-messages {
+        .callout {
+            font-size: rem-calc(12px);
+            margin:0;
+        }
     }
 }

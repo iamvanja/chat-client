@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import './Messages.scss';
 
 import MessageForm from './MessageForm';
 import MessagesList from './MessagesList';
@@ -16,9 +17,10 @@ class Messages extends Component {
         client: PropTypes.shape({
             id: PropTypes.number.isRequired,
             token: PropTypes.object.isRequired,
-        }),
+        }).isRequired,
         chatMessages: PropTypes.shape({
             list: PropTypes.array,
+            posting: PropTypes.bool,
             requesting: PropTypes.bool,
             successful: PropTypes.bool,
             messages: PropTypes.array,
@@ -32,25 +34,28 @@ class Messages extends Component {
     render() {
         const {
             chatMessages: {
-                list,
+                posting,
                 requesting,
-                successful,
-                messages,
-                errors,
+                errors
             },
         } = this.props;
 
         return (
-            <div className="messages1">
-                <MessagesList {...this.props} />
-                <MessageForm {...this.props} />
+            <div className="messages">
+                <MessagesList
+                    {...this.props}
+                    loading={requesting}
+                />
+                <MessageForm
+                    {...this.props}
+                    loading={posting}
+                />
 
-                <div className="form-messages">
-                    {requesting && <span>Posting...</span>}
-                    {!requesting && !!errors.length && (
-                        <FormErrors message="Failure to post due to:" errors={errors} />
-                    )}
-                </div>
+                {!posting && !requesting && !!errors.length && (
+                    <div className="error-messages">
+                        <FormErrors errors={errors} />
+                    </div>
+                )}
             </div>
         );
     }

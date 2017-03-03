@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
-
+// todo: clean-up
 const InputError = (props) => {
     const {
         input,
         type,
+        id,
         placeholder,
+        className,
+        disabled,
         meta: {
             touched,
             error
@@ -12,27 +15,50 @@ const InputError = (props) => {
         label
     } = props;
     let isError = touched && error;
-    let rootEl = label ? 'label' : 'div';
-
-    return (
-        <rootEl className={ isError ? 'is-invalid-label' : '' }>{label}
+    let renderInput = () => {
+        return (
             <input
                 {...input}
                 placeholder={placeholder}
+                disabled={disabled}
                 type={type}
-                className={ isError ? 'is-invalid-input' : '' }
+                id={id}
+                name={input.name}
+                className={`${className} ${isError ? 'is-invalid-input' : ''}`}
             />
+        );
+    }
+    let renderError = () => {
+        return (
             <span className={`form-error ${isError ? 'is-visible' : ''}`}>
                 {error}
             </span>
-        </rootEl>
+        )
+    }
+    return (
+        <div>
+            {label ? (
+                <label className={ isError ? 'is-invalid-label' : '' }>{label}
+                    {renderInput()}
+                    {renderError()}
+                </label>
+            ) : (
+                <div>
+                    {renderInput()}
+                    {renderError()}
+                </div>
+            )}
+        </div>
     );
 }
 
 InputError.propTypes = {
     input: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
+    id: PropTypes.string,
     placeholder: PropTypes.string,
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
     meta: PropTypes.shape({
         touched: PropTypes.bool,
         error: PropTypes.string,
