@@ -19,12 +19,19 @@ class Messages extends Component {
             token: PropTypes.object.isRequired,
         }).isRequired,
         chatMessages: PropTypes.shape({
-            list: PropTypes.array,
-            posting: PropTypes.bool,
-            requesting: PropTypes.bool,
-            successful: PropTypes.bool,
-            messages: PropTypes.array,
-            errors: PropTypes.array,
+            list: PropTypes.arrayOf(PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                created: PropTypes.string.isRequired,
+                text: PropTypes.string.isRequired,
+                client: PropTypes.shape({
+                    email: PropTypes.string.isRequired,
+                })
+            })).isRequired,
+            posting: PropTypes.bool.isRequired,
+            requesting: PropTypes.bool.isRequired,
+            successful: PropTypes.bool.isRequired,
+            messages: PropTypes.array.isRequired,
+            errors: PropTypes.array.isRequired,
         }).isRequired,
         messageCreate: PropTypes.func.isRequired,
         messageRequest: PropTypes.func.isRequired,

@@ -40,16 +40,13 @@ function* messageCreateFlow(action) {
     try {
         const { client, message } = action;
         const createdMessage = yield call(messageCreateApi, client, message);
-        // creates the action with the format of
-        // {
-        //   type: MESSAGE_CREATE_SUCCESS,
-        //   message,
-        // }
-        // Which we could do inline here, but again, consistency
+        // add client's email
+        createdMessage.client = {
+            email: client.email
+        };
         yield put(messageCreateSuccess(createdMessage));
     }
     catch (error) {
-        // same with error
         yield put(messageCreateError(error));
     }
 }

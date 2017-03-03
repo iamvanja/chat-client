@@ -10,7 +10,14 @@ class MessagesList extends React.Component {
         }).isRequired,
         loading: PropTypes.bool.isRequired,
         chatMessages: PropTypes.shape({
-            list: PropTypes.array.isRequired,
+            list: PropTypes.arrayOf(PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                created: PropTypes.string.isRequired,
+                text: PropTypes.string.isRequired,
+                client: PropTypes.shape({
+                    email: PropTypes.string.isRequired,
+                })
+            })).isRequired,
         }).isRequired,
         messageRequest: PropTypes.func.isRequired,
     }
@@ -40,7 +47,7 @@ class MessagesList extends React.Component {
         return (
             <div className="message" key={message.id}>
                 <p>
-                    <strong className="message-text author">{message.clientId}</strong>
+                    <strong className="message-text author">{message.client.email}</strong>
                     <small className="message-text datetime">{this.formatDateTime(message.created)}</small>
                     <span className="message-text content">{message.text}</span>
                 </p>
