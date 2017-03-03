@@ -15,7 +15,7 @@ import { setClient, unsetClient } from '../Client/actions';
 import { CLIENT_UNSET } from '../Client/constants';
 
 // The url derived from our .env file
-const loginUrl = `${process.env.REACT_APP_API_URL}/api/Clients/login`;
+const loginUrl = `${process.env.REACT_APP_API_URL}/api/Clients/login?include=user`;
 
 function loginApi(email, password) {
     return fetch(loginUrl, {

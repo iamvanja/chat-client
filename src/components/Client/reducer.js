@@ -5,6 +5,8 @@ import { CLIENT_SET, CLIENT_UNSET } from './constants';
 
 const initialState = {
     id: null,
+    email: null,
+    username: null,
     token: null,
 };
 
@@ -13,14 +15,13 @@ const reducer = function clientReducer(state = initialState, action) {
         case CLIENT_SET:
             return {
                 id: action.token.userId,
+                email: action.token.user.email,
+                username: action.token.user.username,
                 token: action.token,
             };
 
         case CLIENT_UNSET:
-            return {
-                id: null,
-                token: null,
-            };
+            return Object.assign({}, initialState);
 
         default:
             return state;
