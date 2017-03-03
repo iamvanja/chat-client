@@ -1,28 +1,40 @@
 import React from 'react';
-import Message from './Message';
 
 class MessagesList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.getMessages = this.getMessages.bind(this);
-        this.renderMessages = this.renderMessages.bind(this);
-        this.renderEmptyComment = this.renderEmptyComment.bind(this);
+        this.fetchMessages();
     }
 
-    getMessages() {
-        return this.props.messages || [];
+    fetchMessages = () => {
+        const { client, messageRequest } = this.props;
+
+        if (client && client.token) {
+            return messageRequest(client);
+        }
+
+        return false;
     }
 
-    renderMessages(messages) {
+    formatDateTime = (dateTime) => {
+        const date = new Date(dateTime);
+        return `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
+    }
+
+    renderSingleMessage = (message) => {
         return (
-            messages.map(message =>
-                <Message message={message} key={message.id} />
-            )
+            <div className="message" key={message.id}>
+                <p>
+                    <strong className="message-text author">{message.clientId}</strong>
+                    <small className="message-text datetime">{this.formatDateTime(message.created)}</small>
+                    <span className="message-text content">{message.text}</span>
+                </p>
+            </div>
         );
     }
 
-    renderEmptyComment() {
+    renderEmptyComment = () => {
         return (
             <div className="empty-comment">
                 <small>No comments yet...</small>
@@ -31,13 +43,27 @@ class MessagesList extends React.Component {
     }
 
     render() {
-        const messages = this.getMessages();
+        const {
+            chatMessages: {
+                list,
+                requesting,
+                successful,
+                messages,
+                errors,
+            },
+        } = this.props;
+
         return (
             <div className="messages">
-                {messages.length ?
-                    this.renderMessages(messages) :
+                {/* TODO: requesting */}
+                {list.length ?
+                    list.map(message => {
+                        return this.renderSingleMessage(message);
+                    }) :
                     this.renderEmptyComment()
                 }
+
+                <button className="button" onClick={this.fetchMessages}>Refetch Messages!</button>
             </div>
         );
     }

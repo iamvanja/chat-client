@@ -7,7 +7,7 @@ import MessagesList from './MessagesList';
 
 import FormErrors from '../FormHelpers/FormErrors';
 
-import { messageCreate } from './actions';
+import { messageCreate, messageRequest } from './actions';
 
 class Messages extends Component {
 
@@ -25,6 +25,7 @@ class Messages extends Component {
             errors: PropTypes.array,
         }).isRequired,
         messageCreate: PropTypes.func.isRequired,
+        messageRequest: PropTypes.func.isRequired,
         reset: PropTypes.func.isRequired,
     }
 
@@ -63,7 +64,7 @@ const mapStateToProps = state => ({
 
 // Make the client and chatMessages available in the props as well
 // as the messageCreate function
-const connected = connect(mapStateToProps, { messageCreate })(Messages);
+const connected = connect(mapStateToProps, { messageCreate, messageRequest })(Messages);
 const formed = reduxForm({
     form: 'chatMessages',
 })(connected);
