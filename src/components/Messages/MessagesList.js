@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import './MessagesList.scss';
 
 class MessagesList extends React.Component {
@@ -61,6 +62,15 @@ class MessagesList extends React.Component {
         );
     }
 
+    scrollToBottom = () => {
+        const node = ReactDOM.findDOMNode(this.messagesEnd);
+        node.scrollIntoView({behavior: "smooth"});
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     render() {
         const {
             loading,
@@ -82,6 +92,8 @@ class MessagesList extends React.Component {
                 )}
 
                 <button className="button" onClick={this.fetchMessages}>Refetch Messages!</button>
+
+                <div ref={(el) => { this.messagesEnd = el; }}></div>
             </div>
         );
     }
