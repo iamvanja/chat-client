@@ -8,7 +8,7 @@ import MessagesList from './MessagesList';
 
 import FormErrors from '../FormHelpers/FormErrors';
 
-import { messageCreate, messageRequest } from './actions';
+import { messageCreate, messageRequest, messageReceiveWs } from './actions';
 
 class Messages extends Component {
 
@@ -36,6 +36,17 @@ class Messages extends Component {
         messageCreate: PropTypes.func.isRequired,
         messageRequest: PropTypes.func.isRequired,
         reset: PropTypes.func.isRequired,
+        socket: PropTypes.object.isRequired,
+    }
+
+    componentDidMount() {
+        const { socket, client, dispatch } = this.props;
+        socket.on('message:new', function(message) {
+            // show message for non-author users
+            if (client.id !== message.clientId) {
+                dispatch(messageReceiveWs(message));
+            }
+        });
     }
 
     render() {

@@ -9,7 +9,6 @@ import {
     messageRequestError,
 } from './actions';
 
-const messagesClientUrl = `${process.env.REACT_APP_API_URL}/api/Clients`;
 const messagesUrl = `${process.env.REACT_APP_API_URL}/api/ChatMessages`;
 
 function handleRequest(request) {
@@ -21,8 +20,7 @@ function handleRequest(request) {
 }
 
 function messageCreateApi(client, message) {
-    const url = `${messagesClientUrl}/${client.id}/chatMessages`;
-    const request = fetch(url, {
+    const request = fetch(messagesUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

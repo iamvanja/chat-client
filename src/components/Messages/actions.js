@@ -5,6 +5,7 @@ import {
     MESSAGE_REQUESTING,
     MESSAGE_REQUEST_SUCCESS,
     MESSAGE_REQUEST_ERROR,
+    MESSAGE_RECEIVE_WS,
 } from './constants';
 
 export const messageCreate = function messageCreate(client, message) {
@@ -18,6 +19,13 @@ export const messageCreate = function messageCreate(client, message) {
 export const messageCreateSuccess = function messageCreateSuccess(message) {
     return {
         type: MESSAGE_CREATE_SUCCESS,
+        message,
+    }
+};
+
+export const messageReceiveWs = function messageReceiveWs(message) {
+    return {
+        type: MESSAGE_RECEIVE_WS,
         message,
     }
 };

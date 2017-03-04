@@ -6,7 +6,7 @@ class ChatPage extends React.Component {
     render() {
         return (
             <div className="page page-chat">
-                <Messages />
+                <Messages socket={this.props.socket} />
             </div>
         )
     }

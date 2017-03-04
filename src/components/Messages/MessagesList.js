@@ -80,7 +80,7 @@ class MessagesList extends React.Component {
         } = this.props;
         return (
             <div className="messages-list">
-                {!loading && (list.length ?
+                {!loading && (!!list.length ?
                     list.map(message => {
                         return this.renderSingleMessage(message);
                     }) :

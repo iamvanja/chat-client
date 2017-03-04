@@ -5,6 +5,7 @@ import {
     MESSAGE_REQUESTING,
     MESSAGE_REQUEST_SUCCESS,
     MESSAGE_REQUEST_ERROR,
+    MESSAGE_RECEIVE_WS,
 } from './constants';
 
 const initialState = {
@@ -36,6 +37,17 @@ const reducer = function messageReducer(state = initialState, action) {
                 successful: true,
                 messages: [{
                     body: `Message '${action.message.text}' created!`,
+                    time: new Date(),
+                }],
+            });
+
+        // when other user creates a message, add their message to state
+        case MESSAGE_RECEIVE_WS:
+            return Object.assign({}, initialState, {
+                list: [...state.list, action.message],
+                successful: true,
+                messages: [{
+                    body: `Message '${action.message.text}' received!`,
                     time: new Date(),
                 }],
             });
