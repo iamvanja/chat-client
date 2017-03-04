@@ -7,8 +7,6 @@
 
 .page-chat {
     @extend %flex-column;
-    min-height: 100vh;
-    max-height: 100vh;
     .messages,
     .messages-list {
         flex: 1 1 auto;

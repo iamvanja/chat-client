@@ -4,7 +4,7 @@ import Login from '../components/Login/Login';
 class LoginPage extends Component {
     render() {
         return (
-            <div className="page-signup">
+            <div className="page page-signup">
                 <div className="text-center">
                     <h1>Login</h1>
                 </div>

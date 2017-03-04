@@ -28,7 +28,6 @@ class Login extends Component {
         this.props.loginRequest(values);
     }
 
-
     render() {
         const {
             handleSubmit,

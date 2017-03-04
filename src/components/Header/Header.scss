@@ -4,7 +4,25 @@
     background-color: map-get($foundation-palette, primary);
     padding: rem-calc(10);
     color: $white;
-    h2, h4, p {
-        margin-bottom: 0;
+    a {
+        color: $white;
+        &:hover {
+            color: $light-gray;
+        }
+    }
+    h2 {
+        margin-bottom:0;
+        line-height: 1;
+    }
+    // layout
+    .header-inner-container {
+        display:flex;
+        .brand-container {
+            flex: 1;
+        }
+        .authorized-container {
+            flex: 1;
+            align-self: flex-end;
+        }
     }
 }

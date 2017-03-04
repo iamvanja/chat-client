@@ -1,16 +1,46 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './Header.scss';
 
+import { unsetClient } from '../Client/actions';
+
 class Header extends React.PureComponent {
-  render() {
-    return (
-      <div className="header">
-        <h2>Chack</h2>
-        <h4>/room/room-name <small>todo:room info</small></h4>
-        <p>Logged in as <i>username</i></p>
-      </div>
-    );
-  }
+
+    logout = () => {
+        return this.props.dispatch(unsetClient());
+    }
+
+    renderAuthorized = (username) => {
+        return (
+            <div className="authorized-container text-right">
+                <small>
+                    {username} (<a className="logout" onClick={this.logout}>Logout</a>)
+                </small>
+            </div>
+        );
+    }
+
+    render() {
+        const { client: { email } } = this.props;
+        return (
+            <div className="header">
+                <div className="header-inner-container">
+                    <div className="brand-container">
+                        <h2>Chack</h2>
+                    </div>
+                    { email && this.renderAuthorized(email) }
+                </div>
+            </div>
+        );
+    }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+    client: state.client,
+});
+
+const connected = connect(mapStateToProps)(Header);
+
+export default connected;
+
+// export default Header;
