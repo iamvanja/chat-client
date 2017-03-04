@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import './Header.scss';
 
 import { unsetClient } from '../Client/actions';
 
 class Header extends React.PureComponent {
+
+    static Proptypes = {
+        client: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            token: PropTypes.object.isRequired,
+        }),
+    }
 
     logout = () => {
         return this.props.dispatch(unsetClient());
