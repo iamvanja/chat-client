@@ -8,6 +8,7 @@ const InputError = (props) => {
         placeholder,
         className,
         disabled,
+        refName,
         meta: {
             touched,
             error
@@ -24,6 +25,7 @@ const InputError = (props) => {
                 type={type}
                 id={id}
                 name={input.name}
+                ref={refName}
                 className={`${className} ${isError ? 'is-invalid-input' : ''}`}
             />
         );

@@ -19,6 +19,10 @@ class MessageForm extends Component {
         reset: PropTypes.func.isRequired,
     }
 
+    componentDidMount() {
+        this.input.focus();
+    }
+
     submit = (message) => {
         const { client, messageCreate, reset } = this.props;
 
@@ -27,6 +31,8 @@ class MessageForm extends Component {
 
         // reset the form upon submission
         reset();
+
+        this.input.focus();
     }
 
     render() {
@@ -44,6 +50,7 @@ class MessageForm extends Component {
                 placeholder="Message"
                 component={InputError}
                 disabled={loading}
+                refName={(ref) => this.input = ref}
                 validate={messageRequired} />
 
                 {loading && (
