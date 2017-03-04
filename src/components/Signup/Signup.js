@@ -6,6 +6,8 @@ import { Link } from 'react-router';
 // import form helpers
 import FormMessages from '../FormHelpers/FormMessages';
 import FormErrors from '../FormHelpers/FormErrors';
+import InputError from '../FormHelpers/InputError';
+import { requiredValidate, emailValidate } from '../FormHelpers/validators';
 
 import { signupRequest } from './actions';
 
@@ -43,18 +45,18 @@ class Signup extends Component {
             <div className="signup">
                 {/* Use this Submit handler with our own submit handler */}
                 <form onSubmit={handleSubmit(this.submit)}>
-                    <label htmlFor="email">E-mail</label>
+
                     <Field
                         name="email"
                         type="email"
                         id="email"
                         className="email"
                         placeholder="E-mail"
-                        component="input"
-                        required="required"
+                        component={InputError}
+                        label="E-mail"
+                        validate={[requiredValidate, emailValidate]}
                     />
 
-                    <label htmlFor="password">Password</label>
                     <Field
                         name="password"
                         type="password"
@@ -63,6 +65,9 @@ class Signup extends Component {
                         placeholder="Password"
                         component="input"
                         required="required"
+                        component={InputError}
+                        label={"Password"}
+                        validate={requiredValidate}
                     />
 
                     <button action="submit" className="button expanded">SIGNUP</button>

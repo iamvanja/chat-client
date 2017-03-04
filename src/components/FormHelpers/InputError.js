@@ -16,8 +16,10 @@ const InputError = (props) => {
         label
     } = props;
     let isError = touched && error;
-    let renderInput = () => {
-        return (
+    return (
+        <div>
+            {label && (
+                <label htmlFor={id} className={ isError ? 'is-invalid-label' : '' }>{label}</label>)}
             <input
                 {...input}
                 placeholder={placeholder}
@@ -28,28 +30,9 @@ const InputError = (props) => {
                 ref={refName}
                 className={`${className} ${isError ? 'is-invalid-input' : ''}`}
             />
-        );
-    }
-    let renderError = () => {
-        return (
             <span className={`form-error ${isError ? 'is-visible' : ''}`}>
                 {error}
             </span>
-        )
-    }
-    return (
-        <div>
-            {label ? (
-                <label className={ isError ? 'is-invalid-label' : '' }>{label}
-                    {renderInput()}
-                    {renderError()}
-                </label>
-            ) : (
-                <div>
-                    {renderInput()}
-                    {renderError()}
-                </div>
-            )}
         </div>
     );
 }
